@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port =  process.env.PORT || 3000;
 
-let Total = 0;
+// let Total = 0;
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
@@ -16,9 +16,7 @@ io.on('connection', function(socket){
       io.emit('item', msg);
   });
     socket.on('value', function(msg){
-        Total += parseInt(msg);
         io.emit('value', msg);
-        io.emit('total', Total);
     });
 });
 
