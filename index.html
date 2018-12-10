@@ -12,7 +12,8 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
-      div {bottom: 10%; position: absolute; width: 100%}
+      #buttons {bottom: 10%; position: absolute; width: 100%}
+      #items {bottom: 15%; position: absolute; width: 100%}
       button { width: 18% ;background: rgb(100, 255, 83); border: 2px; padding: 10px; border-radius: 20px; margin: 10px}
     </style>
   </head>
@@ -24,12 +25,20 @@
         <button>Enviar</button>
     </form>
 
-    <div>
-        <button onclick="FillAndSendForm(10);">10</button>
-        <button onclick="FillAndSendForm(20);">20</button>
-        <button onclick="FillAndSendForm(50);">50</button>
-        <button onclick="FillAndSendForm(100);">100</button>
-        <button onclick="FillAndSendForm(200);">200</button>
+    <div id="buttons">
+        <button onclick="SendItem('Abajur vintage');">Abajur vintage</button>
+        <button onclick="SendItem('Obra de arte');">Obra de arte</button>
+        <button onclick="SendItem('Ceramica chinesa');">Ceramica chinesa</button>
+        <button onclick="SendItem('Garrafa de vinho');">Garrafa de vinho</button>
+        <button onclick="SendItem('Cordao de ouro');">Cordao de ouro</button>
+    </div>
+
+    <div id="items">
+        <button style="width: 18% ;background: rgb(120, 164, 255); border: 2px; padding: 10px; border-radius: 20px; margin: 10px" onclick="FillAndSendForm(10);">10</button>
+        <button style="width: 18% ;background: rgb(120, 164, 255); border: 2px; padding: 10px; border-radius: 20px; margin: 10px" onclick="FillAndSendForm(20);">20</button>
+        <button style="width: 18% ;background: rgb(120, 164, 255); border: 2px; padding: 10px; border-radius: 20px; margin: 10px" onclick="FillAndSendForm(50);">50</button>
+        <button style="width: 18% ;background: rgb(120, 164, 255); border: 2px; padding: 10px; border-radius: 20px; margin: 10px" onclick="FillAndSendForm(100);">100</button>
+        <button style="width: 18% ;background: rgb(120, 164, 255); border: 2px; padding: 10px; border-radius: 20px; margin: 10px" onclick="FillAndSendForm(200);">200</button>
     </div>
 
 
@@ -49,6 +58,11 @@
               $('#messages').append($('<li>').text(msg));
               window.scrollTo(0, document.body.scrollHeight);
           });
+
+          socket.on('item', function(msg){
+              $('#messages').append($('<li>').text('O item a ser leiloado é: ' + msg));
+              window.scrollTo(0, document.body.scrollHeight);
+          });
       });
 
       function FillAndSendForm(el) {
@@ -57,6 +71,12 @@
           $('#m').val(el);
           socket.emit('chat message', el);
           $('#m').val('');
+      }
+
+      function SendItem(el) {
+          var socket = io();
+          // var text = $(el).html();
+          socket.emit('item', el);
       }
     </script>
   </body>
