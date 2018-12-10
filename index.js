@@ -13,7 +13,7 @@ io.on('connection', function(socket){
   });
   socket.on('value change', function(msg){
       io.emit('value change', msg);
-  });)
+  });
 });
 
 http.listen(port, function(){
