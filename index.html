@@ -12,7 +12,8 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
-      #button {}
+      div {bottom: 10%; position: absolute; width: 100%}
+      button { width: 18% ;background: rgb(100, 255, 83); border: 2px; padding: 10px; border-radius: 20px; margin: 10px}
     </style>
   </head>
 
@@ -21,15 +22,15 @@
     <form>
         <input id="m" autocomplete="on" />
         <button>Enviar</button>
+    </form>
+
+    <div>
         <button onclick="FillAndSendForm(10);">10</button>
         <button onclick="FillAndSendForm(20);">20</button>
-        <button onclick="FillAndSendForm(30);">30</button>
-        <button onclick="FillAndSendForm(40);">40</button>
         <button onclick="FillAndSendForm(50);">50</button>
         <button onclick="FillAndSendForm(100);">100</button>
         <button onclick="FillAndSendForm(200);">200</button>
-        <button onclick="FillAndSendForm(300);">300</button>
-    </form>
+    </div>
 
 
 
