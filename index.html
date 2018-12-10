@@ -55,11 +55,8 @@
           var socket = io();
           // var text = $(el).html();
           $('#m').val(el);
-          $('form').submit(function(){
-              socket.emit('chat message', el);
-              $('#m').val('');
-              return false;
-          });
+          socket.emit('chat message', el);
+          $('#m').val('');
       }
     </script>
   </body>
