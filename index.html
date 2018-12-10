@@ -20,15 +20,15 @@
     <ul id="messages"></ul>
     <form>
         <input id="m" autocomplete="on" />
-        <button onclick="SubmitForm();">Enviar</button>
-        <button onclick="SubmitValue('10');">10</button>
-        <button onclick="SubmitValue('20');">20</button>
-        <button onclick="SubmitValue('30');">30</button>
-        <button onclick="SubmitValue('40');">40</button>
-        <button onclick="SubmitValue('50');">50</button>
-        <button onclick="SubmitValue('100');">100</button>
-        <button onclick="SubmitValue('200');">200</button>
-        <button onclick="SubmitValue('300');">300</button>
+        <button>Enviar</button>
+        <button onclick="FillAndSendForm('10');">10</button>
+        <button onclick="FillAndSendForm('20');">20</button>
+        <button onclick="FillAndSendForm('30');">30</button>
+        <button onclick="FillAndSendForm('40');">40</button>
+        <button onclick="FillAndSendForm('50');">50</button>
+        <button onclick="FillAndSendForm('100');">100</button>
+        <button onclick="FillAndSendForm('200');">200</button>
+        <button onclick="FillAndSendForm('300');">300</button>
     </form>
 
 
@@ -48,43 +48,14 @@
               $('#messages').append($('<li>').text(msg));
               window.scrollTo(0, document.body.scrollHeight);
           });
-
-
-        // $('form').submit(function(){
-        //   socket.emit('chat message', $('#m').val());
-        //   $('#m').val('');
-        //   return false;
-        // });
-        // socket.on('chat message', function(msg){
-        //   $('#messages').append($('<li>').text(msg));
-        //   window.scrollTo(0, document.body.scrollHeight);
-        // });
       });
 
-      $(function SubmitForm(){
-          var socket = io();
-          $('form').submit(function(){
-              socket.emit('chat message', $('#m').val());
-              $('#m').val('');
-              return false;
-          });
-          socket.on('chat message', function(msg){
-              $('#messages').append($('<li>').text(msg));
-              window.scrollTo(0, document.body.scrollHeight);
-          });
-      })
+      function FillAndSendForm(el) {
+          var text = $(el).html();
 
-      $(function SubmitValue(val){
-          var socket = io();
-          $('form').submit(function(){
-              socket.emit('value change', val);
-              return false;
-          });
-          socket.on('value change', function(msg){
-              $('#messages').append($('<li>').text(msg));
-              window.scrollTo(0, document.body.scrollHeight);
-          });
-      })
+          $('#m').val(text);
+          $('form').submit();
+      }
     </script>
   </body>
 
