@@ -13,10 +13,12 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
   socket.on('item', function(msg){
-      Total += parseInt(msg);
       io.emit('item', msg);
-      io.emit('total', Total)
   });
+    socket.on('value', function(msg){
+        Total += parseInt(msg);
+        io.emit('value', msg);
+    });
 });
 
 http.listen(port, function(){

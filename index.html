@@ -12,7 +12,8 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee}
       #messages li.notMine { background: #eee; color: blue}
-      #messages li.total{ background: #eee; color: red; font-size: 30px}
+      #messages li.total{ background: #eee; color: darkorchid;}
+      #messages li.total{ background: #eee; color: chartreuse;}
       #messages { margin-bottom: 40px }
       #buttons {bottom: 10%; position: absolute; width: 100%}
       #items {bottom: 15%; position: absolute; width: 100%}
@@ -60,6 +61,11 @@
               window.scrollTo(0, document.body.scrollHeight);
           });
 
+          socket.on('value', function(msg){
+              $('#messages').append($('<li class="value">').text(msg));
+              window.scrollTo(0, document.body.scrollHeight);
+          });
+
           socket.on('item', function(msg){
               $('#messages').append($('<li class="notMine">').text('O item a ser leiloado é: ' + msg));
               window.scrollTo(0, document.body.scrollHeight);
@@ -75,7 +81,7 @@
           var socket = io();
           // var text = $(el).html();
           $('#m').val(el);
-          socket.emit('chat message', el);
+          socket.emit('value', el);
           $('#m').val('');
       }
 
