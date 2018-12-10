@@ -7,7 +7,7 @@
       body { font: 13px Helvetica, Arial; }
       form { background: rgba(0,0,0,0.3); padding: 1%; position: fixed; bottom: 0; width: 100%}
       form input { border: 0; padding: 10px; width: 75%; margin-right: .5%; border-radius: 20px }
-      form button { width: 20% ;background: rgb(100, 255, 83); border: 2px; padding: 10px; border-radius: 20px}
+      form button { width: 20% ;background: rgb(100, 255, 83); border: 2px; padding: 10px; border-radius: 20px; margin: 10px}
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
@@ -18,9 +18,16 @@
 
   <body>
     <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="on" />
-      <button>Send</button>
+    <form>
+      <!--<input id="m" autocomplete="on" />-->
+        <button onclick="sendBet(10)" >10</button>
+        <button onclick="sendBet(20)" >20</button>
+        <button onclick="sendBet(30)" >30</button>
+        <button onclick="sendBet(40)" >40</button>
+        <button onclick="sendBet(50)" >50</button>
+        <button onclick="sendBet(100)" >100</button>
+        <button onclick="sendBet(200)" >200</button>
+        <button onclick="sendBet(300)" >300</button>
     </form>
 
 
@@ -28,14 +35,16 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      $(function () {
+      $(function sendBet(value) {
         var socket = io();
 
-          $('form').submit(function(){
-              socket.emit('value change', $('#m').val());
-              $('#m').val('');
-              return false;
-          });
+          socket.emit('value change', value);
+
+          // $('form').submit(function(){
+          //
+          //     $('#m').val('');
+          //     return false;
+          // });
           socket.on('value change', function(msg){
               $('#messages').append($('<li>').text(msg));
               window.scrollTo(0, document.body.scrollHeight);
