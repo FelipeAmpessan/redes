@@ -18,6 +18,7 @@ io.on('connection', function(socket){
     socket.on('value', function(msg){
         Total += parseInt(msg);
         io.emit('value', msg);
+        io.emit('total', Total);
     });
 });
 
